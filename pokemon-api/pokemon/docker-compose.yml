@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  #poke-react-app:
+
+  #poke-spring-api:
+  #depends_on:
+  #- postgres-service
+
+  postgres-service:
+    image: postgres:alpine
+    user: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
