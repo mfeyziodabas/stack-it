@@ -1,4 +1,4 @@
-package com.example.pokemon.battle;
+package com.example.pokemon.entities;
 
 import jakarta.persistence.*;
 

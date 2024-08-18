@@ -1,6 +1,8 @@
 package com.example.pokemon.battle;
 
+import com.example.pokemon.entities.BattleResult;
 import com.example.pokemon.feignclients.PokemonFeignClient;
+import com.example.pokemon.models.ParticipantsOfBattle;
 import com.example.pokemon.models.Pokemon;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;

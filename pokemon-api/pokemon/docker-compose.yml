@@ -9,6 +9,7 @@ services:
 
   postgres-service:
     image: postgres:alpine
+    container_name: postgres-db
     user: postgres
     environment:
       - POSTGRES_USER=postgres

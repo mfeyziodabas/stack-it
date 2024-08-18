@@ -1,4 +1,4 @@
-package com.example.pokemon.battle;
+package com.example.pokemon.models;
 
 public record ParticipantsOfBattle(Long attacker, Long defender) {
 }
