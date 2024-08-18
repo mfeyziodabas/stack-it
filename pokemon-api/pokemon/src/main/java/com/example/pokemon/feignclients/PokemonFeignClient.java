@@ -17,5 +17,4 @@ public interface PokemonFeignClient {
             value = "/pokemon/{id}"
     )
     Pokemon getPokemon(@PathVariable Long id);
-
 }

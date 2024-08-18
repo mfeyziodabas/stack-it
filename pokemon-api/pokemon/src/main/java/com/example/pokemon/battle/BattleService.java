@@ -1,51 +1,62 @@
 package com.example.pokemon.battle;
 
 import com.example.pokemon.feignclients.PokemonFeignClient;
+import com.example.pokemon.models.Pokemon;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BattleService {
 
-    private final BattleResultRepository resultRepository;
+    private final BattleResultRepository battleResultRepository;
     private final PokemonFeignClient pokemonFeignClient;
 
     @Autowired
     public BattleService(BattleResultRepository resultRepository, PokemonFeignClient pokemonFeignClient) {
-        this.resultRepository = resultRepository;
+        this.battleResultRepository = resultRepository;
         this.pokemonFeignClient = pokemonFeignClient;
     }
 
-
-    public List<BattleResult> getBattleResults() {
-        return resultRepository.findAll();
+    public List<BattleResult> getAllBattleResults() {
+        return battleResultRepository.findAll();
     }
 
     public BattleResult findBattleResultByBattleId(Long id) {
-        return resultRepository.findById(id).orElse(null);
+        return battleResultRepository.findById(id).orElse(null);
     }
 
-    public BattleResult saveOneBattleResult(ParticipiansOfBattle participiansOfBattle) {
-        BattleResult result = new BattleResult(participiansOfBattle.attacker(), participiansOfBattle.defender(), new Date());
-        return resultRepository.save(result);
+    public BattleResult arrangeABattle(ParticipantsOfBattle participantsOfBattle) {
+        List<Pokemon> participants = checkIfParticipantsExistsAndCallPokemonInfo(participantsOfBattle);
+        if(participants.size() != 2) {
+            return null;
+        }
+        BattleResult battleResult = determineTheWinnerAndCreateBattleResult(participants);
+        battleResultRepository.save(battleResult);
+        return battleResult;
     }
 
-    public BattleResult arrangeABattle(ParticipiansOfBattle participiansOfBattle) {
-        return determineTheWinnerAndCreateBattleResult(participiansOfBattle);
+    private BattleResult determineTheWinnerAndCreateBattleResult(List<Pokemon> participants) {
+        participants.sort(Comparator.comparing(Pokemon::getWeight).reversed());
+        return createBattleResult(participants.getFirst().getId(), participants.getLast().getId());
     }
 
-    private BattleResult determineTheWinnerAndCreateBattleResult(ParticipiansOfBattle participiansOfBattle) {
-        checkIfParticipiantsExists(participiansOfBattle);
-        return null;
+    private BattleResult createBattleResult(Long winner, Long loser) {
+        return new BattleResult(winner, loser, new Date());
     }
 
-    public boolean checkIfParticipiantsExists(ParticipiansOfBattle participiansOfBattle) {
-        System.out.println(pokemonFeignClient.getPokemon(participiansOfBattle.attacker()));
-        return true;
+    private List<Pokemon> checkIfParticipantsExistsAndCallPokemonInfo(ParticipantsOfBattle participantsOfBattle) {
+        ArrayList<Pokemon> participantsPokemonList = new ArrayList<>();
+        try {
+            Pokemon attacker = pokemonFeignClient.getPokemon(participantsOfBattle.attacker());
+            Pokemon defender = pokemonFeignClient.getPokemon(participantsOfBattle.defender());
+            participantsPokemonList.add(attacker);
+            participantsPokemonList.add(defender);
+            System.out.println("Attacker: " + attacker + "\nDefender: " + defender);
+        } catch (FeignException ignored) {
+        }
+        return participantsPokemonList;
     }
 }

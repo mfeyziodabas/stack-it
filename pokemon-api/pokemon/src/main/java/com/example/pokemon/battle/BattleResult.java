@@ -49,38 +49,6 @@ public class BattleResult {
     public BattleResult() {
     }
 
-    public Long getBattleId() {
-        return battleId;
-    }
-
-    public void setBattleId(Long battleId) {
-        this.battleId = battleId;
-    }
-
-    public Long getWinnerId() {
-        return winnerId;
-    }
-
-    public void setWinnerId(Long winnerId) {
-        this.winnerId = winnerId;
-    }
-
-    public Long getLoserId() {
-        return loserId;
-    }
-
-    public void setLoserId(Long loserId) {
-        this.loserId = loserId;
-    }
-
-    public Date getBattleDate() {
-        return battleDate;
-    }
-
-    public void setBattleDate(Date battleDate) {
-        this.battleDate = battleDate;
-    }
-
     @Override
     public String toString() {
         return "BattleResult{" +
