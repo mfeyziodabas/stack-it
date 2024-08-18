@@ -32,7 +32,6 @@ public class BattleResultController {
     }
 
     @PostMapping("/start")
-    @ResponseBody
     public ResponseEntity<BattleResult> startBattle(@RequestBody ParticipantsOfBattle participantsOfBattle){
         BattleResult battleResult = battleService.arrangeABattle(participantsOfBattle);
         if(battleResult == null){

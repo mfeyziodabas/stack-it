@@ -39,8 +39,8 @@ public class BattleService {
     }
 
     private BattleResult determineTheWinnerAndCreateBattleResult(List<Pokemon> participants) {
-        participants.sort(Comparator.comparing(Pokemon::getWeight).reversed());
-        return createBattleResult(participants.getFirst().getId(), participants.getLast().getId());
+        participants.sort(Comparator.comparing(Pokemon::weight).reversed());
+        return createBattleResult(participants.getFirst().id(), participants.getLast().id());
     }
 
     private BattleResult createBattleResult(Long winner, Long loser) {
@@ -54,8 +54,8 @@ public class BattleService {
             Pokemon defender = pokemonFeignClient.getPokemon(participantsOfBattle.defender());
             participantsPokemonList.add(attacker);
             participantsPokemonList.add(defender);
-            System.out.println("Attacker: " + attacker + "\nDefender: " + defender);
-        } catch (FeignException ignored) {
+        } catch (FeignException e) {
+            e.printStackTrace();
         }
         return participantsPokemonList;
     }
