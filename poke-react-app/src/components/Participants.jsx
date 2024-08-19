@@ -4,7 +4,7 @@ import questionMark from "../logos/question-mark.svg";
 
 const Participants = ({ attacker, defender, setAttacker, setDefender }) => {
   return (
-    <div className="border">
+    <div>
       <Container className="d-flex justify-content-center mt-5">
         <Row className="align-items-center">
           <Col md="auto">

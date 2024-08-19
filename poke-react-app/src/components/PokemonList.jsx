@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import PokemonCard from "./PokemonCard";
 
-import "./PokemonList.css";
-
 const PokemonList = ({ onSelectPokemon }) => {
   const [randomPokemons, setRandomPokemons] = useState([]);
 
@@ -36,9 +34,9 @@ const PokemonList = ({ onSelectPokemon }) => {
   }, []);
 
   return (
-    <div className="border">
+    <div>
       <button onClick={() => fetchPokemons()}>Yenile</button>
-      <Container className="border d-flex justify-content-center">
+      <Container className="d-flex justify-content-center">
         <Row
           xs={3}
           md={4}
