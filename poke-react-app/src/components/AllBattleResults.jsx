@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import BattleResult from "./BattleResult";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AllBattleResults = () => {
   const [battleResults, setBattleResults] = useState([]);
