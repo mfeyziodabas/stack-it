@@ -1,7 +1,18 @@
 version: "3"
 
 services:
-  #poke-react-app:
+  poke-react-app:
+    image: 'poke-react-app:latest'
+    container_name: poke-react-app
+    build:
+      context: ./../../poke-react-app
+      dockerfile: Dockerfile
+    ports:
+        - "3000:3000"
+    networks:
+      - poke-networks
+    depends_on:
+      - spring-app
 
   spring-app:
     image: 'docker-spring-boot-postgres:latest'
