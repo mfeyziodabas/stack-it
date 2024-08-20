@@ -10,7 +10,7 @@ const Home = () => {
 
   const [attacker, setAttacker] = useState(null);
   const [defender, setDefender] = useState(null);
-  const [winnerId, setWinnerId] = useState(null);
+  const [winner, setWinner] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const onSelectPokemon = (pokemon) => {
@@ -46,7 +46,7 @@ const Home = () => {
       }
 
       const data = await fetchResponse.json();
-      setWinnerId(data.winnerId);
+      setWinner(data);
     } catch (e) {
       console.error(e);
     } finally {
@@ -54,12 +54,8 @@ const Home = () => {
     }
   };
 
-  if (winnerId) {
-    return (
-      <ShowBattleResult
-        winner={attacker.id === winnerId ? attacker : defender}
-      />
-    );
+  if (winner) {
+    return <ShowBattleResult winner={winner} />;
   }
 
   return (
@@ -83,6 +79,7 @@ const Home = () => {
           className="m-2"
           variant="secondary"
           onClick={() => navigate("/allbattleresults")}
+          disabled={loading}
         >
           See All Battle Results
         </Button>

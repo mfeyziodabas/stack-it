@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import PokemonCard from "./PokemonCard";
 
 const PokemonList = ({ onSelectPokemon }) => {
@@ -35,13 +35,23 @@ const PokemonList = ({ onSelectPokemon }) => {
 
   return (
     <div>
-      <button onClick={() => fetchPokemons()}>Yenile</button>
-      <Container className="d-flex justify-content-center">
+      <Container className="border">
+        <p>
+          Choose from a random list of 12 out of a total of 1000 pokémon, or
+          refresh.
+        </p>
+        <Button
+          className="mb-1"
+          onClick={() => fetchPokemons()}
+        >
+          Refresh Pokemons
+        </Button>
+      </Container>
+      <Container className="d-flex justify-content-center border mt-2">
         <Row
           xs={3}
           md={4}
           lg={6}
-          className="g-4"
         >
           {randomPokemons.map((pokemon, i) => (
             <PokemonCard

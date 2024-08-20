@@ -5,7 +5,7 @@ import questionMark from "../logos/question-mark.svg";
 const Participants = ({ attacker, defender, setAttacker, setDefender }) => {
   return (
     <div>
-      <Container className="d-flex justify-content-center mt-5">
+      <Container className="d-flex justify-content-center mt-5 border">
         <Row className="align-items-center">
           <Col md="auto">
             {attacker ? (
@@ -19,9 +19,9 @@ const Participants = ({ attacker, defender, setAttacker, setDefender }) => {
                   height={200}
                 />
                 <Card.Body>
+                  <Card.Title>{attacker.name.toUpperCase()}</Card.Title>
+                  <Card.Text>Attacker</Card.Text>
                   <Button onClick={() => setAttacker(null)}>Remove</Button>
-                  <Card.Title>Attacker</Card.Title>
-                  <Card.Text>{attacker.name}</Card.Text>
                 </Card.Body>
               </Card>
             ) : (
@@ -50,9 +50,9 @@ const Participants = ({ attacker, defender, setAttacker, setDefender }) => {
                   height={200}
                 />
                 <Card.Body>
+                  <Card.Title>{defender.name.toUpperCase()}</Card.Title>
+                  <Card.Text>Defender</Card.Text>
                   <Button onClick={() => setDefender(null)}>Remove</Button>
-                  <Card.Title>Defender</Card.Title>
-                  <Card.Text>{defender.name}</Card.Text>
                 </Card.Body>
               </Card>
             ) : (

@@ -1,10 +1,14 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
+import "./../App.css";
 
 const PokemonCard = ({ pokemon, onSelectPokemon }) => {
   return (
     <>
-      <Col onClick={() => onSelectPokemon(pokemon)}>
+      <Col
+        onClick={() => onSelectPokemon(pokemon)}
+        className="hover mb-2 mt-2"
+      >
         <Card className="h-100">
           <Card.Img
             variant="top"
@@ -15,7 +19,7 @@ const PokemonCard = ({ pokemon, onSelectPokemon }) => {
             }
           />
           <Card.Body>
-            <Card.Title>{pokemon.name}</Card.Title>
+            <Card.Title>{pokemon.name.toUpperCase()}</Card.Title>
             <Card.Text>Weight: {pokemon.weight}</Card.Text>
           </Card.Body>
         </Card>
