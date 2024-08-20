@@ -3,9 +3,20 @@ version: "3"
 services:
   #poke-react-app:
 
-  #poke-spring-api:
-  #depends_on:
-  #- postgres-service
+  spring-app:
+    image: 'docker-spring-boot-postgres:latest'
+    container_name: poke-spring-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-service:5432/postgres
+    networks:
+      - poke-networks
 
   postgres-service:
     image: postgres:alpine
@@ -16,3 +27,10 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    networks:
+       - poke-networks
+
+networks:
+  poke-networks:
+
+
