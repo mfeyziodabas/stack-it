@@ -6,6 +6,7 @@ import com.example.pokemon.models.ParticipantsOfBattle;
 import com.example.pokemon.models.Pokemon;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class BattleService {
     }
 
     public List<BattleResult> getAllBattleResults() {
-        return battleResultRepository.findAll();
+        return battleResultRepository.findAll(Sort.by(Sort.Direction.DESC,"battleDate"));
     }
 
     public BattleResult findBattleResultByBattleId(Long id) {
