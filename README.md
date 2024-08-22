@@ -1,6 +1,6 @@
 # Pokemon Battle
 
-This project is a full-stack web application where users can simulate battles between two randomly selected Pokemon. The application consists of three main components:
+This project is a full-stack web application where users can simulate battles between two selected Pokemon. The application consists of three main components:
 
 - **Frontend**: A ReactJS application that allows users to select Pokemon and start battles.
 - **Backend**: A Spring Boot API that handles battle logic and retrieves Pokemon data.
@@ -8,7 +8,7 @@ This project is a full-stack web application where users can simulate battles be
 
 ## Features
 
-- Users are presented with a random selection of 12 Pokemon.
+- Users can select Pokemons for a battle between 12 Pokemon. (These 12 Pokemon are ramdomy listed between 1000 Pokemon from Pokemon API - resfresh possible)
 - Users can choose an attacker and a defender Pokemon from the given selection.
 - Users can refresh the selection to get a new set of 12 Pokemon. (Because there are more then 1000 pokemon in API)
 - Once Pokemon are selected, users can start the battle.
